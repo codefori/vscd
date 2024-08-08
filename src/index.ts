@@ -2,6 +2,7 @@ import { exists, getContent, getCwd, setContent, setVirtualCwd } from "./system"
 import { globSync } from 'glob'
 
 const args = process.argv.slice(2);
+let clean = false;
 
 for (let i = 0; i < args.length; i++) {
   switch (args[i]) {
@@ -10,6 +11,9 @@ for (let i = 0; i < args.length; i++) {
     case `-d`:
       setVirtualCwd(args[++i]);
       break;
+    case `--clean`:
+      clean = true;
+      i++;
   }
 }
 
@@ -35,7 +39,7 @@ if (!packageJson) {
   process.exit(1);
 }
 
-if (!packageJson.contributes) {
+if (!packageJson.contributes || clean) {
   packageJson.contributes = {};
 }
 
