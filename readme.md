@@ -25,3 +25,7 @@ Each `contributes.json` file must contain the `contributes` property. The conten
 
 * `--clean` (optional, recommended) - the existing `package.json` contributions will be ignored and will be re-built from the `contributes.json` files.
 * `-d <dir>` (optional) - force `vscd` to use another directory other than your working directory.
+
+### More
+
+See an example of `vscd` in here on the [codefori/vscode-db2i](https://github.com/codefori/vscode-db2i) repository.
