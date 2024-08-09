@@ -4,7 +4,7 @@
   "description": "vscd utility",
   "main": "index.js",
   "bin": {
-    "vscd": "./dist/index.js"
+    "vscd": "dist/index.js"
   },
   "devDependencies": {
     "@babel/core": "^7.24.8",
@@ -15,7 +15,7 @@
     "webpack-cli": "^5.1.4"
   },
   "repository": {
-    "url": "https://github.com/codefori/vscd"
+    "url": "git+https://github.com/codefori/vscd.git"
   },
   "scripts": {
     "build:dev": "webpack --mode none --config ./webpack.config.js",
