@@ -6,5 +6,5 @@ The `package.json` file is getting rather large for big extensions. This command
 
 ### Arguments
 
-* `--clean` (optional) - the existing `package.json` contributions will be ignored and will be re-built from the `contributes.json` files.
+* `--clean` (optional, recommended) - the existing `package.json` contributions will be ignored and will be re-built from the `contributes.json` files.
 * `-d <dir>` (optional) - force `vscd` to use another directory other than your working directory.

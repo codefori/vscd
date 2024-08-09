@@ -43,12 +43,43 @@ async function main() {
     packageJson.contributes = {};
   }
   
-  const contributions = globSync('**/contributes.json', { ignore: 'node_modules/**', cwd: getCwd() });
+  const contributionPaths = globSync('**/contributes.json', { ignore: 'node_modules/**', cwd: getCwd() });
+
+  const contributions: { [relativePath: string]: {commands: string[], content: any} } = {};
+
+  for (const contributionPath of contributionPaths) {
+    const content = getContent(contributionPath);
+    const json = getAsJson(content);
   
-  for (const contribution of contributions) {
-    console.log(`Found contribution: ${contribution}`);
+    if (!json) {
+      console.log(`Invalid contributes.json: ${contributionPath}`);
+      continue;
+    }
+
+    if (!json.contributes) {
+      console.log(`No contributes in ${contributionPath}`);
+      continue;
+    }
   
-    let baseJson = getAsJson(getContent(contribution));
+    contributions[contributionPath] = {
+      commands: Array.isArray(json.contributes.commands) ? json.contributes.commands.map(c => c.command).filter(c => c) : [],
+      content: json
+    };
+  }
+
+  const findFileForCommand = (commandId: string) => {
+    for (const [relativePath, contribution] of Object.entries(contributions)) {
+      if (contribution.commands.includes(commandId)) {
+        return relativePath;
+      }
+    }
+  }
+  
+  for (const contributionRelativePath in contributions) {
+    console.log(`Found contribution: ${contributionRelativePath}`);
+    const contribution = contributions[contributionRelativePath];
+  
+    let baseJson = contribution.content;
   
     if (!baseJson) {
       console.log(`Invalid contributes.json!`);
@@ -72,7 +103,12 @@ async function main() {
             for (const menuItem of menu) {
               if (menuItem.command) {
                 if (!commandIds.includes(menuItem.command)) {
-                  console.log(`\tmenus.${menuGroup}->${menuItem.command} not found in commands`);
+                  const locationDefined = findFileForCommand(menuItem.command);
+                  if (locationDefined) {
+                    console.log(`\tmenus.${menuGroup} -> ${menuItem.command} command is defined in ${locationDefined}`);
+                  } else {
+                    console.log(`\tmenus.${menuGroup} -> ${menuItem.command} command is not defined`);
+                  }
                 }
               }
             }
