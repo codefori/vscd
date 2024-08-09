@@ -14,7 +14,7 @@
 			"sourceMaps": true,
       "program": "${workspaceFolder}/dist/index.js",
       // "cwd": "/Users/barry/Downloads/git-cmvc-pwsi-test",
-      "args": ["-d", "/Users/barry/Repos/vscode-db2i"],
+      "args": ["-d", "/Users/barry/Repos/vscode-db2i", "--clean"],
 			"preLaunchTask": {
 				"type": "npm",
 				"script": "build:dev"
