@@ -17,6 +17,7 @@
   "repository": {
     "url": "git+https://github.com/codefori/vscd.git"
   },
+	"publisher": "halcyontechltd",
   "scripts": {
     "build:dev": "webpack --mode none --config ./webpack.config.js",
     "build": "webpack --mode production --config ./webpack.config.js",
