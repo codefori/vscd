@@ -4,7 +4,7 @@ Visual Studio Code package merger (`vscd`).
 
 The `package.json` file is getting rather large for big extensions. This command line tool will search for all `contributes.json` files in current working directory to build up the `package.json`.
 
-Each `contrubutes.json` file must contain the `contributes` property. That is the only property that gets looked at.
+Each `contributes.json` file must contain the `contributes` property. That is the only property that gets looked at.
 
 ### Arguments
 
