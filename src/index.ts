@@ -1,5 +1,6 @@
 import { exists, getContent, getCwd, setContent, setVirtualCwd } from "./system";
 import { globSync } from 'glob'
+import JSON5 from 'json5';
 
 const args = process.argv.slice(2);
 let clean = false;
@@ -21,7 +22,7 @@ async function main() {
 
   const getAsJson = (content: string) => {
     try {
-      return JSON.parse(content);
+      return JSON5.parse(content);
     } catch (e) {
       return undefined;
     }
